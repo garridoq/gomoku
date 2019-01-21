@@ -18,6 +18,10 @@ U64 Board::get_available_squares(){
 	return ~bitboards[FULL_BOARD];
 }
 
+U64* Board::get_bitboards(){
+	return bitboards;
+}
+
 void Board::print_board(){
 	// We will print the board using Os for white and Xs for black
 	int i, j;
