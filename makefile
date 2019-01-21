@@ -15,5 +15,8 @@ evaluation.o: evaluation.hpp evaluation.cpp move.hpp
 main.o: Board.hpp main.cpp
 	g++ -c main.cpp
 
-main: main.o Board.o move.o evaluation.o
-	g++ main.o Board.o move.o evaluation.o -o main
+move_tree.o: move_tree.hpp Board.hpp
+	g++ -c move_tree.cpp
+
+main: main.o Board.o move.o evaluation.o move_tree.o
+	g++ main.o Board.o move.o evaluation.o move_tree.o -o main
