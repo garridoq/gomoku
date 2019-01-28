@@ -4,5 +4,6 @@
 #include "move.hpp"
 
 int evaluate(move m);
+int hasWon(U64 bitboard);
 
 #endif
