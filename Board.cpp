@@ -14,6 +14,13 @@ Board::Board(U64 board_w, U64 board_b){
 	bitboards[FULL_BOARD] = board_w | board_b;
 }
 
+Board::Board(const Board & obj){
+	int i = 0;
+	for(i; i < 3; i++){
+		bitboards[i] = obj.bitboards[i];		
+	}
+}
+
 U64 Board::get_available_squares(){
 	return ~bitboards[FULL_BOARD];
 }
