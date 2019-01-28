@@ -1,4 +1,5 @@
 #include "move_tree.hpp"
+#include <iostream>
 
 void gen_children(node* n){
 		// Generates the children moves for a node
@@ -22,6 +23,7 @@ void gen_children(node* n){
 		int j = 0;
 		while(available_squares != 0){
 			bit = available_squares & 1;
+			std::cout << "Creating child : move :" << i << std::endl;
 			if(bit == 1){
 				n->children[j]->parent = n;
 				n->children[j]->m.board = board_after_move(n->m);	
