@@ -13,5 +13,4 @@ struct move{
 
 Board board_after_move(move m);
 
-
 #endif

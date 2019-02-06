@@ -1,4 +1,4 @@
-all: main
+all: main test_move test_tree
 
 clean:
 	rm -r *.o
