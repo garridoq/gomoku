@@ -85,28 +85,26 @@ int Board::make_move(int bit, int side){
 	return 0;
 }
 
+void print_bitboard(U64 b){
+	// We will print the board using Os for white and Xs for black
+	int i, j;
+	U64 bit,board;
+	board = b;
+	char motif = 'X';
+	std::string out = "----------------------------------------------------------------";
+	for(i = 0; i<2; i++){
+		j = 0;
+		while(board != 0){
+			bit = board & 1;
+			if(bit == 1)
+				out[63-j] = motif;
+			board >>= 1;			
+			j++;
+		}
+	}
 
+	for(i = 0; i<8; i++){
+		std::cout << out.substr(8*i,8) <<std::endl;
+	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}

@@ -14,5 +14,4 @@ struct node{
 void gen_children(node* n);
 void print_node(node* n);
 
-
 #endif

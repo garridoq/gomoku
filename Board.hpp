@@ -33,4 +33,6 @@ class Board{
 
 };
 
+void print_bitboard(U64 b);
+
 #endif
