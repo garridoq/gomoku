@@ -8,7 +8,7 @@ struct move{
 	Board board;
 	int index;
 	int side;
-	int eval = -100000;
+	int evaluation = -1000000;
 };
 
 Board board_after_move(move m);

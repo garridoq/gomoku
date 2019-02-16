@@ -2,6 +2,10 @@
 #include <iostream>
 
 int pattern_match(U64 bitboard, Pattern pattern){
+	
+	//Will return the number of times a pattern
+	//matches in a given bitboard.
+		
 	int count = 0;
 	int width = pattern.width;
 	int height = pattern.height;

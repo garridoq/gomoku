@@ -1,4 +1,4 @@
-all: main test_move test_tree test_pattern
+all: main test_move test_tree test_pattern test_eval
 
 clean:
 	rm -r *.o
@@ -24,8 +24,11 @@ test_move.o: Board.hpp move.hpp test_move.cpp
 test_tree.o: Board.hpp move.hpp move_tree.hpp test_tree.cpp
 	g++ -c test_tree.cpp
 
+test_eval.o: Board.hpp move.hpp move_tree.hpp test_eval.cpp
+	g++ -c test_eval.cpp -O3
+
 move_tree.o: move_tree.hpp Board.hpp move_tree.cpp
-	g++ -c move_tree.cpp
+	g++ -c move_tree.cpp -O3
 
 main: main.o Board.o move.o evaluation.o move_tree.o
 	g++ main.o Board.o move.o evaluation.o move_tree.o -o main
@@ -35,6 +38,9 @@ test_move: test_move.o move.o Board.o
 
 test_tree: test_tree.o move.o Board.o move_tree.o
 	g++ test_tree.o Board.o move.o move_tree.o -o test_tree
+
+test_eval: test_eval.o move.o Board.o move_tree.o
+	g++ test_eval.o Board.o move.o move_tree.o -o test_eval
 
 test_pattern.o: test_pattern.cpp Pattern.hpp
 	g++ -c test_pattern.cpp -O3
