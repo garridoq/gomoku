@@ -38,6 +38,13 @@ void gen_children(node* n){
 		}
 }
 
+void copy_node(node* n_in, node* n_out){
+
+	n_in->parent = n_out->parent;
+	n_in->m = n_out->m;
+	n_in->children = n_out->children;	
+}
+
 void print_node(node* n){
 	for(int i = 0; i < n->children.size(); ++i){
 		std::cout << "Children " << i << ":\n"<<std::endl;
@@ -45,54 +52,80 @@ void print_node(node* n){
 	}
 }
 
-int negamax(node* n, int depth, move* best_move){
+int negamax(node* n, int depth){
 	
 	//Negamax is a version of minmax
 	//based on the relation : max(a,b) = - min(-a,-b)
 	//Allowing us to use only one routine
 	//instead of two
-	//
-	//Children are evaluated before parents and so we 
-	//will never have a children as best mvoe in the end
-	//
-	//If we use > instead of >= we will have to come back up
-	//the tree to parent node to get the next move in the sequence
 	
 	if(depth == 0){ 
-		return 0;
+		return rand()%10;
 	//	return evaluate(n->m);
 	//when evaluation fuction works
 	}
 	int max = -10000000;
 	gen_children(n);
 	for(auto &child : n->children){
-		int score = -negamax(&child, depth-1, best_move);
-		std::cout <<"Move: " << board_after_move(child.m).get_bitboards()[2] << " Depth: "<< depth <<" Score:" << score  << std::endl;
-		if(score >= max){
+	
+		int score = -negamax(&child, depth-1);
+	
+//		std::cout <<"Move: " << board_after_move(child.m).get_bitboards()[2] << " Depth: "<< depth << std::endl; 
+		
+		if(score > max){
 			max = score;
-			best_move = &(child.m);
-			std::cout << "New best move :" <<  board_after_move(*best_move).get_bitboards()[2] << std::endl;
 		}
+//		std::cout <<" Score:" << score  << " Max:" << max  << std::endl;
+//		if(depth == 2)
+//				std::cout << "===============================\n" << std::endl;
+	}
+	return max;
+}
+
+void RootNegamax(node* n,int depth,node* best_node){
+	//This is the Rootcall of the negamax function
+	//For a more complete decription, refer to the negamax function
+	//
+	//This root call will be used to get the best move
+	//it is a simplified version of negamax where whe know
+	//we wont evaluate a position right now.
+	
+	
+	int max = -10000000;
+	gen_children(n);
+	for(auto &child : n->children){
+	
+		int score = -negamax(&child, depth-1);
+	
+//		std::cout <<"Move: " << board_after_move(child.m).get_bitboards()[2] << " Depth: "<< depth << std::endl; 
+		
+		if(score > max){
+			max = score;
+			copy_node(best_node, &child);
+//			std::cout << "New best move :" <<  board_after_move(best_node->m).get_bitboards()[2];
+		}
+//		std::cout <<" Score:" << score  << " Max:" << max  << std::endl;
+//		if(depth == 2)
+//				std::cout << "===============================\n" << std::endl;
 	}
 }
 
-move get_best_move(node* n, int depth){
+int get_best_move(node* n, int depth, move* best_move){
 	
 	//Main function call to get the best move out
 	//out of a position
-		
-	move best_move;
-
+	
+ 	node* best_node = (node*)malloc(2*sizeof(Node));	
 	//Choice of evaluation method here
 	// minmax, negamax, alpha beta etc
-	negamax(n, depth, &best_move);
+	RootNegamax(n, depth, best_node);
 	
+	copy(best_move, &best_node->m);
+
 	std::cout << "finished getting best move\n" << std::endl;
-	return best_move;
+	std::cout << "best move :" <<  board_after_move(*best_move).get_bitboards()[2] << std::endl;
+	return 0;
 }
-
-
-
 
 
 

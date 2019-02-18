@@ -12,5 +12,6 @@ struct move{
 };
 
 Board board_after_move(move m);
+void copy(move* m_in, move* m_out);
 
 #endif
