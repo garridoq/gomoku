@@ -82,7 +82,7 @@ int negamax(node* n, int depth){
 	return max;
 }
 
-void RootNegamax(node* n,int depth,node* best_node){
+void RootNegamax(node* n,int depth,move* best_move){
 	//This is the Rootcall of the negamax function
 	//For a more complete decription, refer to the negamax function
 	//
@@ -101,7 +101,7 @@ void RootNegamax(node* n,int depth,node* best_node){
 		
 		if(score > max){
 			max = score;
-			copy_node(best_node, &child);
+			copy(best_move, &child.m);
 //			std::cout << "New best move :" <<  board_after_move(best_node->m).get_bitboards()[2];
 		}
 //		std::cout <<" Score:" << score  << " Max:" << max  << std::endl;
@@ -115,12 +115,9 @@ int get_best_move(node* n, int depth, move* best_move){
 	//Main function call to get the best move out
 	//out of a position
 	
- 	node* best_node = (node*)malloc(2*sizeof(Node));	
 	//Choice of evaluation method here
 	// minmax, negamax, alpha beta etc
-	RootNegamax(n, depth, best_node);
-	
-	copy(best_move, &best_node->m);
+	RootNegamax(n, depth, best_move);
 
 	std::cout << "finished getting best move\n" << std::endl;
 	std::cout << "best move :" <<  board_after_move(*best_move).get_bitboards()[2] << std::endl;
