@@ -1,0 +1,142 @@
+\documentclass{article}
+\usepackage[francais]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{xcolor}
+\usepackage[pdftex]{graphicx}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage[a4paper,includeheadfoot,margin=2.54cm]{geometry}
+\usepackage{amsfonts}
+\usepackage{fancyhdr}
+\usepackage{titling}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+ 
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\theauthor}
+\fancyhead[RE,LO]{\thetitle}
+\fancyfoot[CE,CO]{\leftmark}
+\fancyfoot[LE,RO]{\thepage}
+
+\usepackage[thinlines]{easytable}
+
+\title{Rapport de projet : Gomoku}
+\author{Quentin Garrido, Antoine Gélin, Kévin Lor}
+\date{22 février 2019}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+\pagebreak
+%%==============================================================================
+\section{Utilisation}
+
+\pagebreak
+%==============================================================================
+\section{Représentation du plateau}
+
+\pagebreak
+%==============================================================================
+\section{Choix des coups}
+
+\begin{algorithm}
+\caption{Algorithme du Negamax}\label{negamax}
+\begin{algorithmic}[1]
+\Procedure{Negamax}{$node, depth$}
+	\If{depth = 0}
+		\State \textbf{return} \textsc{evaluate}$(node.move)$
+	\EndIf
+	\State max $\gets -\infty$
+	\ForAll{child \textbf{in} node.children}
+		\State score $\gets -\textsc{Negamax}(child, depth -1)$
+		\If{score $>$ max}
+			\State max $\gets$ score
+		\EndIf
+	\EndFor
+	\State \textbf{return} max
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+
+\pagebreak
+%==============================================================================
+\section{Évaluation d'une position}
+
+\begin{figure}[!hbt]
+	\centering
+	\begin{TAB}(e,0.5cm,0.5cm){|c|c|c|c|c|c|c|c|}{|c|c|c|c|c|c|c|c|}
+		X &  &  &  &  &  &  &  \\
+		 & X &  &  &  &  &  &  \\
+		 &  &X  &  &  &  &  &  \\
+		 &  &  &X  &  &  &  &  \\
+		 &  &  &  &X  &  &  &  \\
+		 &  &  &  &  &  &  &  \\
+		 &  &  &  &  &  &  &  \\
+		 &  &  &  &  &  &  &  
+	\end{TAB}\hspace{0.5cm}
+	\begin{TAB}(e,0.5cm,0.5cm){|c|c|c|c|c|c|c|c|}{|c|c|c|c|c|c|c|c|}
+		X &  &  &  &  &  &  &  \\
+		X &  &  &  &  &  &  &  \\
+		X &  &  &  &  &  &  &  \\
+		X &  &  &  &  &  &  &  \\
+		X &  &  &  &  &  &  &  \\
+		 &  &  &  &  &  &  &  \\
+		 &  &  &  &  &  &  &  \\
+		 &  &  &  &  &  &  &  
+	\end{TAB}
+	
+	\begin{TAB}(e,0.5cm,0.5cm){|c|c|c|c|c|c|c|c|}{|c|c|c|c|c|c|c|c|}
+		X & X & X & X & X &  &  &  \\
+		 &  &  &  &  &  &  &  \\
+		 &  &  &  &  &  &  &  \\
+		 &  &  &  &  &  &  &  \\
+		 &  &  &  &  &  &  &  \\
+		 &  &  &  &  &  &  &  \\
+		 &  &  &  &  &  &  &  \\
+		 &  &  &  &  &  &  &  
+	\end{TAB}\hspace{0.5cm}
+	\begin{TAB}(e,0.5cm,0.5cm){|c|c|c|c|c|c|c|c|}{|c|c|c|c|c|c|c|c|}
+		 &  &  &  & X &  &  &  \\
+		 &  &  & X &  &  &  &  \\
+		 &  & X &  &  &  &  &  \\
+		 & X &  &  &  &  &  &  \\
+		X &  &  &  &  &  &  &  \\
+		 &  &  &  &  &  &  &  \\
+		 &  &  &  &  &  &  &  \\
+		 &  &  &  &  &  &  &  
+	\end{TAB}
+	\caption{Patterns vérifiés pour la victoire ou non}
+\end{figure}
+
+\begin{algorithm}
+\caption{Algorithme de pattern matching}\label{pattern_matching}
+\begin{algorithmic}[1]
+\Procedure{Pattern\_matching}{$bitboard, pattern$}
+	\State count $\gets$ 0
+	\For{$i \gets 0$ \textbf{to} $8-\text{pattern.height}$}
+		\For{$j \gets 0$ \textbf{to} $8-\text{pattern.width}$}
+			\If{pattern \& bitboard = pattern} \Comment{\& représente un ET logique bit par bit}
+				\State count $\gets$ count + 1
+			\EndIf
+			\State pattern $\gets$ pattern $>>$ 1 \Comment{$>>$ est un décalage de $n$ bits à droite}
+		\EndFor
+		\State pattern $\gets$ pattern $>>$ pattern.width-1
+	\EndFor
+	\State \textbf{return} count
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+
+\pagebreak
+%==============================================================================
+\section{Résultats}
+
+\pagebreak
+
+\end{document}
