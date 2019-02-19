@@ -23,6 +23,7 @@ class Board{
 	public:
 		Board();
 		Board(U64 board_w, U64 board_b);
+		Board(const Board & obj);
 		U64 get_available_squares();
 		void print_board();
 		int make_move(int bit, int side);
@@ -31,5 +32,7 @@ class Board{
 		U64 bitboards[3] = {};
 
 };
+
+void print_bitboard(U64 b);
 
 #endif

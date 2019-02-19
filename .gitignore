@@ -34,3 +34,6 @@
 *.out
 *.app
 main
+
+# swap files
+*.swp
