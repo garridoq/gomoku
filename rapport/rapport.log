@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.2.19)  19 FEB 2019 22:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.2.19)  19 FEB 2019 23:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -868,22 +868,115 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 30.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [1
+) (./rapport.toc)
+\tf@toc=\write3
+\openout3 = `rapport.toc'.
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4]
+
+[1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+Underfull \hbox (badness 10000) in paragraph at lines 36--42
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 52--53
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 54--56
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 57--59
+
+ []
+
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2015/06/04 1.6 listings language file
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2015/06/04 1.6 listings language file
+)
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 62.
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/omlcmr.fd
+File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 62.
+
+Underfull \hbox (badness 10000) in paragraph at lines 65--66
+
+ []
+
+[2]
+Overfull \hbox (15.7973pt too wide) in paragraph at lines 75--80
+[]\OT1/cmr/m/n/10 Pour repr^^Sesenter le pla-teau nous n'avons pas uti-lis^^Se 
+de ta-bleau mais des \OT1/cmr/m/it/10 bit-boards \OT1/cmr/m/n/10 qui sont la re
+pr^^Sesentation
+ []
+
 Easytable[row:8,col:8]
 Easytable[row:8,col:8]
 Easytable[row:8,col:8]
 Easytable[row:8,col:8]
-[5] [6] (./rapport.aux) ) 
+
+Underfull \hbox (badness 10000) in paragraph at lines 127--130
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 131--136
+
+ []
+
+[3]
+Easytable[row:8,col:8]
+Easytable[row:8,col:8]
+
+Underfull \hbox (badness 10000) in paragraph at lines 173--175
+
+ []
+
+[4]
+Underfull \hbox (badness 10000) in paragraph at lines 211--212
+
+ []
+
+
+Overfull \hbox (5.67122pt too wide) in paragraph at lines 214--218
+\OT1/cmr/m/n/10 Nous avons choisi de ne pas sto-cker le pla-teau apr^^Res le co
+up en m^^Semoire di-rec-te-ment car cette repr^^Sesentation
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 214--218
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 230--231
+
+ []
+
+[5] [6]
+Easytable[row:8,col:8]
+Easytable[row:8,col:8]
+Easytable[row:8,col:8]
+Easytable[row:8,col:8]
+[7] [8] (./rapport.aux) ) 
 Here is how much of TeX's memory you used:
- 6993 strings out of 492982
- 94801 string characters out of 6134896
- 205213 words of memory out of 5000000
- 10433 multiletter control sequences out of 15000+600000
- 12099 words of font info for 47 fonts, out of 8000000 for 9000
+ 7416 strings out of 492982
+ 98831 string characters out of 6134896
+ 224438 words of memory out of 5000000
+ 10843 multiletter control sequences out of 15000+600000
+ 12752 words of font info for 49 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,12n,43p,274b,423s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,12n,51p,274b,1356s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsf
 onts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
 m/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcs
@@ -891,12 +984,15 @@ c10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pf
 b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr
 /share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/
 texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on rapport.pdf (6 pages, 110770 bytes).
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/font
+s/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmti10.pfb>
+Output written on rapport.pdf (8 pages, 154625 bytes).
 PDF statistics:
- 59 PDF objects out of 1000 (max. 8388607)
- 41 compressed objects within 1 object stream
+ 79 PDF objects out of 1000 (max. 8388607)
+ 56 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
