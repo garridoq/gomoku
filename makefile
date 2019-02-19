@@ -8,8 +8,8 @@ Board.o: Board.hpp Board.cpp
 
 move.o: move.hpp move.cpp Board.hpp
 	g++ -c move.cpp
-
-evaluation.o: evaluation.hpp evaluation.cpp move.hpp
+	
+evaluation.o: evaluation.hpp evaluation.cpp move.hpp patterns.hpp Pattern.hpp
 	g++ -c evaluation.cpp
 
 main.o: Board.hpp main.cpp

@@ -1,3 +1,6 @@
+#ifndef PATTERNS_H
+#define PATTERNS_H
+
 #include "Pattern.hpp"
 #include "Board.hpp"
 
@@ -39,3 +42,7 @@ int value_coef[64] = {
 		1,2,2,2,2,2,2,1,
 		1,1,1,1,1,1,1,1
 };
+
+
+
+#endif
