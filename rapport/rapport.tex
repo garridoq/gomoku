@@ -11,7 +11,8 @@
 \usepackage{titling}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
- 
+\usepackage{hyperref}
+
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[LE,RO]{\theauthor}
@@ -21,7 +22,7 @@
 
 \usepackage[thinlines]{easytable}
 
-\title{Rapport de projet : Gomoku}
+\title{Rapport de projet: Gomoku}
 \author{Quentin Garrido, Antoine Gélin, Kévin Lor}
 \date{22 février 2019}
 
@@ -34,7 +35,7 @@
 \section{Introduction}
 
 Le but de ce projet est de réaliser une "intelligence artificielle" pouvant jouer contre un humain au gomoku.\\
-Nous avons choisi d'utiliser un plateau de 8x8 et une victoire avec l'alignement de 5 pions de même couleur.\\
+Nous avons choisi d'utiliser un plateau de 8$	imes$8 et une victoire avec l'alignement de 5 pions de même couleur.\\
 Nous avons programmé en C++ afin d'avoir un langage familier à tout le groupe et qui nous permet d'utiliser
 certaines représentations pour nos structures de données que nous verrons par la suite.\\
 L'un des membres du groupe s'intéressant au moteurs d'échecs et ayant une connaissance des algorithmes utilisés
@@ -76,11 +77,11 @@ Pour représenter le plateau nous n'avons pas utilisé de tableau mais des \text
 sont la représentation d'un plateau avec chaque case repréenté par un bit, ainsi si elle est
 occupée le bit vaudra 1 et 0 sinon.\\
 Le bit de poids fort sera le coin en haut à gauche de notre plateau et celui de poids faible le coin 
-en bas à droite. Nous avons alors la représentation suivante pour un plateau de 8x8:
+en bas à droite. Nous avons alors la représentation suivante pour un plateau de 8$\times$8:
 
 \begin{figure}[!hbt]
 	\centering
-	\begin{TAB}(e,0.5cm,0.5cm){|c|c|c|c|c|c|c|c|}{|c|c|c|c|c|c|c|c|}
+	\begin{TAB}(e, 0.5cm, 0.5cm){|c|c|c|c|c|c|c|c|}{|c|c|c|c|c|c|c|c|}
 		 &  &  &  &  &  &  &  \\
 		 &  &  &  &  & X &  &  \\
 		 &  & X & X &  &  &  &  \\
@@ -90,7 +91,7 @@ en bas à droite. Nous avons alors la représentation suivante pour un plateau d
 		 &  &  &  &  &  &  &  \\
 		 &  &  &  &  &  &  &  
 	\end{TAB}\hspace{0.5cm}
-	\begin{TAB}(e,0.5cm,0.5cm){|c|c|c|c|c|c|c|c|}{|c|c|c|c|c|c|c|c|}
+	\begin{TAB}(e, 0.5cm, 0.5cm){|c|c|c|c|c|c|c|c|}{|c|c|c|c|c|c|c|c|}
 		0 &0  &0  &0  &0  &0  &0  &0  \\
 		0 &0  &0  &0  &0  & 1 &0  &0  \\
 		0 &0  & 1 & 1 &0  &0  &0  &0  \\
@@ -101,7 +102,7 @@ en bas à droite. Nous avons alors la représentation suivante pour un plateau d
 		0 &0  &0  &0  &0  &0  &0  &0 \\ 
 	\end{TAB}
 	
-	\begin{TAB}(e,0.5cm,0.5cm){|c|c|c|c|c|c|c|c|}{|c|c|c|c|c|c|c|c|}
+	\begin{TAB}(e, 0.5cm, 0.5cm){|c|c|c|c|c|c|c|c|}{|c|c|c|c|c|c|c|c|}
 		 &  &  &  &  &  &  &  \\
 		 &  &  &  &  &  &  &  \\
 		 &  &  &  &O  &  &  &  \\
@@ -111,7 +112,7 @@ en bas à droite. Nous avons alors la représentation suivante pour un plateau d
 		 &  &  &  &  &  &  &  \\
 		 &  &  &  &  &  &  &  
 	\end{TAB}\hspace{0.5cm}
-	\begin{TAB}(e,0.5cm,0.5cm){|c|c|c|c|c|c|c|c|}{|c|c|c|c|c|c|c|c|}
+	\begin{TAB}(e, 0.5cm, 0.5cm){|c|c|c|c|c|c|c|c|}{|c|c|c|c|c|c|c|c|}
 		0 &0  &0  &0  &0  &0  &0  &0  \\
 		0 &0  &0  &0  &0  &0  &0  &0  \\
 		0 &0  &0  &0  &1  &0  &0  &0  \\
@@ -131,7 +132,7 @@ gagner de la rapidité à l'évaluation des coups.\\
 C'est ce choix de représentation qui a motivé notre choix d'utiliser le C++ pour le projet.
 En effet il est un des rares langages qui nous permet d'accéder à chaque bits individuellement
 d'un nombre et de réaliser des opérations logiques bit par bit. \\
-Pour représenter un plateau de $n$x$n$ il nous faut $n^2$ bits d'où le choix du plateau 8x8
+Pour représenter un plateau de $n$x$n$ il nous faut $n^2$ bits d'où le choix du plateau 8$\times$8
 car un entier au delà de 64bits est plus dur à représenter en C++.\\
 
 Cette réprésentation va aussi simplifier l'évaluation des coups en elle même car il sera
@@ -147,7 +148,7 @@ ferons commencer les motifs le plus en haut à gauche possible du plateau.
 
 \begin{figure}[!hbt]
 	\centering
-	\begin{TAB}(e,0.5cm,0.5cm){|c|c|c|c|c|c|c|c|}{|c|c|c|c|c|c|c|c|}
+	\begin{TAB}(e, 0.5cm, 0.5cm){|c|c|c|c|c|c|c|c|}{|c|c|c|c|c|c|c|c|}
 		 &  &  &X  &  &  &  &  \\
 		 &  &X  &  &  &  &  &  \\
 		 & X &  &  &  &  &  &  \\
@@ -157,7 +158,7 @@ ferons commencer les motifs le plus en haut à gauche possible du plateau.
 		 &  &  &  &  &  &  &  \\
 		 &  &  &  &  &  &  &  
 	\end{TAB}\hspace{0.5cm}
-	\begin{TAB}(e,0.5cm,0.5cm){|c|c|c|c|c|c|c|c|}{|c|c|c|c|c|c|c|c|}
+	\begin{TAB}(e, 0.5cm, 0.5cm){|c|c|c|c|c|c|c|c|}{|c|c|c|c|c|c|c|c|}
 		0 &0  &0  &1  &0  &0  &0  &0  \\
 		0 &0  &1  &0  &0  &0  &0  &0  \\
 		0 &1  &0  &0  &0  &0  &0  &0  \\
@@ -205,10 +206,10 @@ notre motif.
 Le coup va être un élément central de notre modélisation car il sera utilisé par toutes les parties du programme.\\
 Un coup sera modélisé avec les attributs suivants:
 \begin{itemize}
-\item plateau : le plateau de jeu avant que le coup soit joué
-\item index : l'indice du bit où nous jouons un coup
-\item side : joueur qui réalise le coup, BLANC ou NOIR
-\item evaluation : l'évaluation de la position après avoir joué le coup\\
+\item plateau: le plateau de jeu avant que le coup soit joué
+\item index: l'indice du bit où nous jouons un coup
+\item side: joueur qui réalise le coup, BLANC ou NOIR
+\item evaluation: l'évaluation de la position après avoir joué le coup\\
 \end{itemize}
 
 Nous obtiendrons le plateau après le coup via une procédure qui nous le retournera.\\
@@ -225,9 +226,9 @@ de réelle différence car seule une faible partie de l'arbre est en mémoire à
 L'arbre des coups nous permettra d'obtenir tous les coups jouables depuis une position jusqu'à une profondeur $n$.\\
 Nous représenterons cet arbre par des \textit{noeuds} qui auront les attributs suivants:
 \begin{itemize}
-\item parent : noeud parent, si nous avons besoin de remonter l'arbre des coups
-\item coup : coup associé au noeud
-\item enfants : tous les noeuds ayant des coups réalisables depuis le coup du noeud courant \\
+\item parent: noeud parent, si nous avons besoin de remonter l'arbre des coups
+\item coup: coup associé au noeud
+\item enfants: tous les noeuds ayant des coups réalisables depuis le coup du noeud courant \\
 \end{itemize}
 
 En pratique nous ne générerons pas tout l'arbre jusqu'à la profondeur d'évaluation pour des raisons de coût en mémoire.\\
@@ -242,6 +243,20 @@ que de l'ordre d'évaluation des coups afin d'avoir seulement un faible nombre d
 \section{Choix des coups}
 \subsection{Negamax}
 
+Afin de choisir parmi les différents coups, la méthode la plus populaire (et la plus intuitive) est les Minimax.\\
+L'idée est que nous allons toujours chercher à maximiser notre score en choississant un coup et que notre
+adversaire va chercher à minimiser notre score (maximiser le sien). Cela est exploitable car le gomoku est un jeu
+à somme nulle et ainsi chaque joueur à tout intéet à gagner.\\
+En générant tous les coups jusqu'à une profondeur choisie nous allons successivement vouloir soit maximiser soit minimiser
+notre score. En pratique nous allons appeler récursivement la procédure sur tous les coups enfants jusqu'à ce que nous
+atteignons la fin de l'arbre, et là seulement nous utiliserons notre fonction d'évaluation de position et le score 
+trouvé sera remonté jusqu'à notre coup actuel afin de décider quel coup jouer.\\
+
+Dans notre cas, nous utiliserons une variant du Minimax, le Negamax qui simplifiera le code, au lieu d'avoir une fonction \textit{Min}
+et une fonction \textit{Max} nous aurons une seule fonction \textit{Negamax}.\\
+Cette variante s'appuie sur la relation $-max(a,b) = min(-a,-b)$ et nécessite que la fonction d'évaluation renvoie un résultat
+relatif au joueur, tel que score(Joueur1) = -score(Joueur2).\\
+L'algorithme est simplifié et sera au final :
 \begin{algorithm}
 \caption{Algorithme du Negamax}\label{negamax}
 \begin{algorithmic}[1]
@@ -261,8 +276,75 @@ que de l'ordre d'évaluation des coups afin d'avoir seulement un faible nombre d
 \end{algorithmic}
 \end{algorithm}
 
+Cependant la fonction ne renvoie que le score et pas le coup à choisir, nous allons donc utiliser une variante \textsc{RootNegamax} 
+qui va être quasi identique sauf que juste après la ligne 9 nous allons aussi sauvegarder le coup. Cette méthode nous permet
+de sauvegarder un coup uniquement si il est jouable directement et de ne pas sauvegarder par mégarde un coup plus bas dans
+l'arborescence.\\
 
+Cet algorithme fonctionne très bien mais nous devons quand même évaluer un nombre de positions grandissant énormément en fonction
+de la profondeur:\\
+$\text{nombre de noeuds} = \frac{(\text{nombre de coups possibles initialement})!}{(\text{nombre de coups possibles initialement - profondeur})!}$\\
+Heureusement nous avons une méthode très efficace pour réduire le nombre de coups évalués: l'élagage Alpha Beta.
+
+\pagebreak
 \subsection{Élagage alpha-beta}
+
+L'élagage alpha beta est un algorithme très puissant qui dans le meilleur des cas va évaluer $\sqrt{n}$ noeuds contre $n$ pour le négamax et $n$ dans
+le pire des cas.\\
+Le principe est le suivant: Un noeud qui ne peux pas contribuer positivement à l'évaluation n'a pas à être évalué.\\
+En effet lorsque nous sommes surs que continuer à évaluer ne changera pas le résultat, autant s'arrêter.\\
+Cela va êter réalisé grace à deux variables $\alpha$ et $\beta$ qui vont former l'intervalle des valeurs qui pourraient contribuer à l'évaluation.
+
+\begin{figure}[!hbt]
+		\centering
+	\includegraphics[width=0.7\textwidth]{ab.png}
+		\caption{Exemple d'éxécution de l'algorithme alpha beta. Source: \url{https://commons.wikimedia.org/wiki/File:AB\_pruning.svg}}
+\end{figure}
+
+Dans cet exemple nous avons trois élagages qui ont eu lieu (tous les noeuds sont affichés évalués pour la clarté), de gauche à droite:\\
+Nous cherchons à maximiser la valeur du noeud 5 à la profondeur 3 mais à minimiser la valeur de ses enfants.
+Ainsi pour que le noeud 4 soit utile il faudrait que sa valeur puisse encore dépasser 5 (notre valeur d'$\alpha$) en explorant ses enfants. Or comme nous minimisons
+sa valeur nous ne pourrons jamais dépasser 4, et par conséquent, ainsi il est inutile de continuer et d'valuer le noeud qui aurait valu 5.
+Nous avons économisé une évaluation ici.\\
+Nous cherchons ensuite à maximiser la valeur du noeud 6 à la profondeur 3 en minimisant la valeur de ses enfants.
+Ainsi le second noeud 6 n'est intéressant que si il peut dépasser le 6 (notre valeur d'$\alpha$) déjà calculé, or c'est impossible pour la même raison
+que précédemment, donc nous gagnons encore une évaluation.\\
+Enfin, nous cherchons à minimiser le noeud 5 à la profondeur 2 tout en maximisant ses enfants.
+Nous avons déterminé que sa valeur ne pouvais pas être supérieure à 5, or pour être utile il faudrait qu'elle puisse dépasser 6 (notre $\alpha$) pour 
+remplacer la valeur du noeud 6 de profondeur 1. Ainsi il est inutile de regarder le reste de sons sous arbre car cette partie est inutile.
+Nous gagnerons ici 6 évaluations.\\
+Dans ce cas nous aurions évalué 33 noeuds avec le négamax et seulement 25 avec l'alpha beta, ce qui représente un gain non négligeable. Nous sommes loin 
+de la valeur optimale théorique mais l'amélioration est conséquente et le sera de plus en plus lorsque la taille de l'arbre augmentera. \\
+
+\pagebreak
+Dans la même idée que précédemment pour passer du \textsc{Minimax} au \textsc{Négamax} nous pu adapter la procédure pour qu'elle soit correcte dans
+notre framework négamax. L'algorithme est plus court mais pas forcément plus simple que la version reposant sur le minimax. Il est le suivant:\\
+\begin{algorithm}
+\caption{Algorithme de l'élagage alpha-beta}\label{negamax}
+\begin{algorithmic}[1]
+\Procedure{AlphaBeta}{$node, alpha, beta, depth$}
+	\If{depth = 0}
+		\State \textbf{return} \textsc{evaluate}$(node.move)$
+	\EndIf
+	\ForAll{child \textbf{in} node.children}
+		\State score $\gets -\textsc{AlphaBeta}(child,-beta, -alpha, depth -1)$
+		\If{score $>=$ beta}
+			\State \textbf{return} beta
+		\EndIf
+		\If{score $>$ alpha}
+			\State alpha $\gets$ score
+		\EndIf
+	\EndFor
+	\State \textbf{return} alpha
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+Comme pour le \textsc{Negamax} nous appelons initialement cette procédure depuis une version modifée qui récupérera la coup après la ligne 11.\\
+Les paramètres $\alpha$ et $\beta$ seront respectivement initialisés à $-\infty$ et $+\infty$.\\
+Une façon de réduire le nombre de noeuds évalués serait de considérer à la gauche de l'arbre (les coups évalués en premiers) les coups potentiellement
+bons en choisissant une heuristique telle que la distance au centre du pion posé par le coup, car un coup a plus ce chance d'être bon si il est au centre.
+
 \pagebreak
 %==============================================================================
 \section{Évaluation d'une position}

@@ -44,7 +44,7 @@ int main(){
 	std::cout << "Getting best move..." << std::endl;
 
 	move best_move; 
-	get_best_move(&last, 5, &best_move);
+	get_best_move(&last, 5, &best_move, ALPHA_BETA);
 
 	std::cout << "=================Best move==============\n" << std::endl;
 	board_after_move(best_move).print_board();
