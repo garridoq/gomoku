@@ -47,11 +47,9 @@ int determineScore(U64 *bitboards, int side){
 	U64 playingBB = bitboards[side];
 	U64 opponentBB = bitboards[1-side];
 
-	// TODO : Account for the opponent positions and adjust accordingly
 	int score = 0;
 
 
-	//SCORE FOR THE PLAYING USER
 	// For a straight four : win at the next round
 	for (int i = 0; i < 4; i++){
 		score += 50 * pattern_match(playingBB, patterns_length_4[i]);
@@ -63,7 +61,7 @@ int determineScore(U64 *bitboards, int side){
 	}
 
 	// For a broken three
-	for (int i = 0; i < 12; i++){
+	for (int i = 0; i < 8; i++){
 		score += 19 * pattern_match(playingBB, patterns_length_3_broken[i]);
 	}
 
@@ -71,6 +69,9 @@ int determineScore(U64 *bitboards, int side){
 	for (int i = 0; i < 4; i++){
 		score += 5 * pattern_match(playingBB, patterns_length_2[i]);
 	}
+
+	// For single or isolated points
+	score += pattern_match(playingBB, pattern_single_or_isolated);
 
 
 
