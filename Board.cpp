@@ -35,7 +35,7 @@ void Board::print_board(){
 	U64 board, bit;
 	char motif;
 	char motifs[3] = "OX";
-	std::string out = "----------------------------------------------------------------";
+	std::string out = "|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|";
 	for(i = 0; i<2; i++){
 		j = 0;
 		board = bitboards[i];
@@ -43,7 +43,7 @@ void Board::print_board(){
 		while(board != 0){
 			bit = board & 1;
 			if(bit == 1)
-				out[63-j] = motif;
+				out[2*(63-j)+1] = motif;
 			board >>= 1;			
 			j++;
 		}
@@ -51,9 +51,10 @@ void Board::print_board(){
 
 
 	for(i = 0; i<8; i++){
-		std::cout << out.substr(8*i,8) <<std::endl;
+		std::cout << 8-i<< "  " <<out.substr(16*i,16) <<"|" <<std::endl;
+		//std::cout << "----------------" <<std::endl;
 	}
-
+	std::cout << "   |1|2|3|4|5|6|7|8|" <<std::endl;
 }
 
 int Board::make_move(int bit, int side){
