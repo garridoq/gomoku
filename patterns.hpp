@@ -39,7 +39,7 @@ Pattern patterns_length_4_opponent_v2[4] = {
 	{ 0x0000000000800000ULL, 6, 6},
 };
 
-Pattern patterns_length_4_broken[8] = {
+Pattern patterns_length_4_broken[12] = {
 	{ 0xB800000000000000ULL, 5, 1},
 	{ 0xD800000000000000ULL, 5, 1},
 	{ 0xE800000000000000ULL, 5, 1},
@@ -57,7 +57,7 @@ Pattern patterns_length_4_broken[8] = {
 	{ 0x0810200080000000ULL, 5, 5},
 };
 
-Pattern patterns_length_4_broken_opponent[8] = {
+Pattern patterns_length_4_broken_opponent[12] = {
 	{ 0x4000000000000000ULL, 5, 1},
 	{ 0x2000000000000000ULL, 5, 1},
 	{ 0x1000000000000000ULL, 5, 1},

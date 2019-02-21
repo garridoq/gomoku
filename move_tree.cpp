@@ -117,20 +117,20 @@ void rootNegamax(node* n,int depth,move* best_move){
 int alphaBeta(node* n,int alpha, int beta, int depth){
 	
 	if(depth == 0)
-		return evaluate(n->m);	
+		return -evaluate(n->m);	
 	gen_children(n);
 	if(n->children.empty()){
-		std::cout << "Game is over" << std::endl;
-			return evaluate(n->m);
+//		std::cout << "Game is over" << std::endl;
+			return -evaluate(n->m);
 	}
 	for(auto &child : n->children){
 		int score = -alphaBeta(&child,-beta, -alpha, depth-1);
-		std::cout <<"Move: " << board_after_move(child.m).get_bitboards()[2] << " Depth: "<< depth << " alpha: " << alpha << " beta: " << beta << std::endl; 
+//		std::cout <<"BB0: " << board_after_move(child.m).get_bitboards()[0] << " BB1: "<<  board_after_move(child.m).get_bitboards()[1] << " Depth: "<< depth << " alpha: " << alpha << " beta: " << beta << " side: " << child.m.side << std::endl; 
 		if(score >= beta)
 			return beta;
 		if(score > alpha)
 			alpha = score;
-		std::cout <<" Score:" << score  << " alpha:" << alpha  << std::endl;
+//		std::cout <<" Score:" << score  << " alpha:" << alpha  << std::endl;
 	}
 	return alpha;
 }
@@ -139,15 +139,15 @@ void rootAlphaBeta(node* n, int alpha, int beta, int depth, move* best_move){
 	
 	gen_children(n);
 	for(auto &child : n->children){
-		int score = alphaBeta(&child,alpha, beta, depth-1);
-		std::cout <<"Move: " << board_after_move(child.m).get_bitboards()[2] << " Depth: "<< depth << " alpha: " << alpha << " beta: " << beta << std::endl; 
+		int score = -alphaBeta(&child,alpha, beta, depth-1);
+//		std::cout <<"Move: " << board_after_move(child.m).get_bitboards()[2] << " Depth: "<< depth << " alpha: " << alpha << " beta: " << beta << std::endl; 
 		if(score > alpha){
 			alpha = score;
 			copy(best_move, &child.m);	
-			std::cout << "New best move :" <<  board_after_move(*best_move).get_bitboards()[2]<< " alpha : " <<alpha << std::endl;
+//			std::cout << "New best move :" <<  board_after_move(*best_move).get_bitboards()[2]<< " alpha : " <<alpha << std::endl;
 		}
 	}
-	std::cout << "Best score found : " << alpha << " with move: " <<  board_after_move(*best_move).get_bitboards()[2] << std::endl;
+//	std::cout << "Best score found : " << alpha << " with move: " <<  board_after_move(*best_move).get_bitboards()[2] << std::endl;
 }
 
 

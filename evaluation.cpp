@@ -12,7 +12,7 @@ int evaluate(move m){
 	int won = hasWon(bitboards[side]);
 
 	if(won == 1){
-		score = 10000;
+		score = 100000;
 	}
 	
 	else{
@@ -52,17 +52,17 @@ int determineScore(U64 *bitboards, int side){
 
 	// For a straight four : win at the next round
 	for (int i = 0; i < 4; i++){
-		score += 50 * pattern_match(playingBB, patterns_length_4[i]);
+		score += 20 * pattern_match(playingBB, patterns_length_4[i]);
 	}
 
 	// For a straight three : win in two plays
 	for (int i = 0; i < 4; i++){
-		score += 20 * pattern_match(playingBB, patterns_length_3[i]);
+		score += 10 * pattern_match(playingBB, patterns_length_3[i]);
 	}
 
 	// For a broken three
 	for (int i = 0; i < 8; i++){
-		score += 19 * pattern_match(playingBB, patterns_length_3_broken[i]);
+		score += 6 * pattern_match(playingBB, patterns_length_3_broken[i]);
 	}
 
 	// For two aligned
@@ -71,9 +71,12 @@ int determineScore(U64 *bitboards, int side){
 	}
 
 	// For single or isolated points
-	score += pattern_match(playingBB, pattern_single_or_isolated);
-
-
+	U64 index = 0x1Ull;
+	for(int i = 0; i  < 63; i++){
+		if((U64)(index & playingBB) == index)
+			score += value_coef[i];
+		index <<=1;
+	}
 
 	return score;
 }
