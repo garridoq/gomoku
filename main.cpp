@@ -13,7 +13,8 @@ int main(){
 	int y = 0;
 	int index = 0;
 	node last;
-	
+	int over= 0;
+
 	while(1){
 		
 		//We play
@@ -22,15 +23,18 @@ int main(){
 		std::cin >>	x;
 		std::cout << "y: ";
 		std::cin >> y;
-		index = 8*y + 7 - x;
-
+		index = 8*(y-1) + 7 - x+1;
 		m.side = side_to_play;
 		m.index = index;
+		if((over = is_game_over(board_after_move(m))))
+			break;
 		
 		//AI play
 		std::cout << "L'IA réfléchit" << std::endl;
 		last.m = m;			
-		get_best_move(&last, 2, &m, ALPHA_BETA);
+		get_best_move(&last, 4, &m, ALPHA_BETA);
+		if((over = is_game_over(board_after_move(m))))
+			break;
 		m.board = board_after_move(m);
 	}
 }

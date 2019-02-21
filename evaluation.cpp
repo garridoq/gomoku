@@ -2,6 +2,7 @@
 #include "patterns.hpp"
 #include "Pattern.hpp"
 #include <string>
+#include <iostream>
 
 
 int evaluate(move m){
@@ -23,13 +24,6 @@ int evaluate(move m){
 
 	return score;
 }
-
-
-
-
-
-
-
 
 int hasWon(U64 bitboard){
 	for (int i = 0; i < 4; i++){
@@ -77,9 +71,29 @@ int determineScore(U64 *bitboards, int side){
 	}
 
 	// For single or isolated points
-	score += pattern_match(playingBB, pattern_single_or_isolated);
-
-
+	U64 index = 0x1Ull;
+	for(int i = 0; i  < 63; i++){
+		if((U64)(index & playingBB) == index)
+			score += value_coef[i];
+		index <<=1;
+	}
 
 	return score;
+}
+
+int is_game_over(Board board){
+	U64* bitboards = board.get_bitboards();
+	if(hasWon(bitboards[WHITE])){
+		std::cout << "O's won the game, congratulations !" << std::endl;
+	   return 1;	
+	}
+	if(hasWon(bitboards[BLACK])){
+		std::cout << "X's won the game, congratulations !" << std::endl;
+		return 1;
+	}
+	if(~bitboards[3] == 1ULL){
+		std::cout << "The game is a draw." << std::endl;
+		return 1;
+	}
+	return 0;
 }
