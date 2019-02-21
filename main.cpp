@@ -1,19 +1,32 @@
 #include <iostream>
 #include "Board.hpp"
-
+#include "move_tree.hpp"
+#include "move.hpp"
 int main(){
 	
 	Board board{};
-	Board board2{0x101C2422200000ULL,0x2028201A00020200ULL};	
-	
-	board.print_board();
-	std::cout <<"\n=============================\n" << std::endl;
-	board2.print_board();
-	
-	int x_move = 1;
-	int y_move = 7;
-	int bit = 8*y_move + (7-x_move);
-	board2.make_move(bit, WHITE);
-	std::cout <<"\n=============================\n" << std::endl;
-	board2.print_board();
+
+	int side_to_play = WHITE;
+	move m;
+	m.board = board;
+	int x = 0;
+	int y = 0;
+	int index = 0;
+	node last;
+
+	while(1){
+		
+		//We play
+		m.board.print_board();
+		std::cout << "Quel case voulez vous jouer ? ";
+		std::cin >>	index;
+		m.side = side_to_play;
+		m.index = index;
+		
+		//AI play
+		std::cout << "L'IA réfléchit" << std::endl;
+		last.m = m;			
+		get_best_move(&last, 1, &m, ALPHA_BETA);
+		m.board = board_after_move(m);
+	}
 }

@@ -1,9 +1,12 @@
 #include "move_tree.hpp"
 #include <iostream>
 #include <limits>
+#include "evaluation.hpp"
 
 void gen_children(node* n){
 		// Generates the children moves for a node
+		if(hasWon(board_after_move(n->m).get_bitboards()[n->m.side]))
+			return;
 		int bit;
 		unsigned int side = 1 - (n->m.side);
 		U64 available_squares = board_after_move(n->m).get_available_squares();
@@ -61,7 +64,7 @@ int negamax(node* n, int depth){
 	//instead of two
 	
 	if(depth == 0){ 
-		return rand()%20;
+		return evaluate(n->m);;
 	//	return evaluate(n->m);
 	//when evaluation fuction works
 	}
@@ -114,16 +117,20 @@ void rootNegamax(node* n,int depth,move* best_move){
 int alphaBeta(node* n,int alpha, int beta, int depth){
 	
 	if(depth == 0)
-		return	((n->m.side)*2-1)*rand()%20;
+		return evaluate(n->m);	
 	gen_children(n);
+	if(n->children.empty()){
+		std::cout << "Game is over" << std::endl;
+			return evaluate(n->m);
+	}
 	for(auto &child : n->children){
 		int score = -alphaBeta(&child,-beta, -alpha, depth-1);
-		//std::cout <<"Move: " << board_after_move(child.m).get_bitboards()[2] << " Depth: "<< depth << " alpha: " << alpha << " beta: " << beta << std::endl; 
+		std::cout <<"Move: " << board_after_move(child.m).get_bitboards()[2] << " Depth: "<< depth << " alpha: " << alpha << " beta: " << beta << std::endl; 
 		if(score >= beta)
 			return beta;
 		if(score > alpha)
 			alpha = score;
-		//std::cout <<" Score:" << score  << " alpha:" << alpha  << std::endl;
+		std::cout <<" Score:" << score  << " alpha:" << alpha  << std::endl;
 	}
 	return alpha;
 }
@@ -132,14 +139,15 @@ void rootAlphaBeta(node* n, int alpha, int beta, int depth, move* best_move){
 	
 	gen_children(n);
 	for(auto &child : n->children){
-		int score = -alphaBeta(&child,-beta, -alpha, depth-1);
-		//std::cout <<"Move: " << board_after_move(child.m).get_bitboards()[2] << " Depth: "<< depth << " alpha: " << alpha << " beta: " << beta << std::endl; 
+		int score = alphaBeta(&child,alpha, beta, depth-1);
+		std::cout <<"Move: " << board_after_move(child.m).get_bitboards()[2] << " Depth: "<< depth << " alpha: " << alpha << " beta: " << beta << std::endl; 
 		if(score > alpha){
 			alpha = score;
 			copy(best_move, &child.m);	
-			//std::cout << "New best move :" <<  board_after_move(*best_move).get_bitboards()[2]<< " alpha : " <<alpha << std::endl;
+			std::cout << "New best move :" <<  board_after_move(*best_move).get_bitboards()[2]<< " alpha : " <<alpha << std::endl;
 		}
 	}
+	std::cout << "Best score found : " << alpha << " with move: " <<  board_after_move(*best_move).get_bitboards()[2] << std::endl;
 }
 
 
@@ -157,8 +165,8 @@ int get_best_move(node* n, int depth, move* best_move, int algorithm){
 		return -1;
 	}
 
-	std::cout << "finished getting best move\n" << std::endl;
-	std::cout << "best move :" <<  board_after_move(*best_move).get_bitboards()[2] << std::endl;
+//	std::cout << "finished getting best move\n" << std::endl;
+//	std::cout << "best move :" <<  board_after_move(*best_move).get_bitboards()[2] << std::endl;
 	return 0;
 }
 
