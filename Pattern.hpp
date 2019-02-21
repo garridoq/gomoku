@@ -30,5 +30,7 @@ struct Pattern{
 };
 
 int pattern_match(U64 bitboard, Pattern pattern);
+int pattern_match(U64 bitboard1, Pattern pattern1, U64 bitboard2, Pattern pattern2);
+
 
 #endif

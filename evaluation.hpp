@@ -5,4 +5,5 @@
 
 int evaluate(move m);
 int hasWon(U64 bitboard);
+int determineScore(U64 *bitboards, int side);
 #endif
