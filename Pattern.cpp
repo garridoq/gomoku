@@ -36,7 +36,7 @@ int pattern_match(U64 bitboard1, Pattern pattern1, U64 bitboard2, Pattern patter
 
 	for(int i=0; i <= 8-height; ++i){
 		for(int j = 0; j <= 8-width; ++j){
-			if(((U64)(p1 & bitboard1) == p1) && ((U64)(p2 & bitboard2) == p2))
+			if(((U64)(p1 & bitboard1) == p1) && !((U64)(p2 & bitboard2) == p2))
 				count++;
 			p1 >>= 1;
 			p2 >>= 1;
