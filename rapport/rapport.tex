@@ -35,11 +35,11 @@
 \section{Introduction}
 
 Le but de ce projet est de réaliser une "intelligence artificielle" pouvant jouer contre un humain au gomoku.\\
-Nous avons choisi d'utiliser un plateau de 8$	imes$8 et une victoire avec l'alignement de 5 pions de même couleur.\\
+Nous avons choisi d'utiliser un plateau de 8$\times$8 et une victoire avec l'alignement de 5 pions de même couleur.\\
 Nous avons programmé en C++ afin d'avoir un langage familier à tout le groupe et qui nous permet d'utiliser
 certaines représentations pour nos structures de données que nous verrons par la suite.\\
 L'un des membres du groupe s'intéressant au moteurs d'échecs et ayant une connaissance des algorithmes utilisés
-nous avons transposé ces méthodes vers le gomoku, qui possède les même caractéristique en étant plus simple.\\
+nous avons transposé ces méthodes vers le gomoku, qui possède les même caractéristique tout en étant plus simple.\\
 
 Le projet à été réalisé à travail égal par tous les membres du groupe en suivant la répartition suivante:
 \begin{itemize}
@@ -246,7 +246,7 @@ que de l'ordre d'évaluation des coups afin d'avoir seulement un faible nombre d
 Afin de choisir parmi les différents coups, la méthode la plus populaire (et la plus intuitive) est les Minimax.\\
 L'idée est que nous allons toujours chercher à maximiser notre score en choississant un coup et que notre
 adversaire va chercher à minimiser notre score (maximiser le sien). Cela est exploitable car le gomoku est un jeu
-à somme nulle et ainsi chaque joueur à tout intéet à gagner.\\
+à somme nulle et ainsi chaque joueur à tout intéret à gagner.\\
 En générant tous les coups jusqu'à une profondeur choisie nous allons successivement vouloir soit maximiser soit minimiser
 notre score. En pratique nous allons appeler récursivement la procédure sur tous les coups enfants jusqu'à ce que nous
 atteignons la fin de l'arbre, et là seulement nous utiliserons notre fonction d'évaluation de position et le score 
@@ -254,7 +254,7 @@ trouvé sera remonté jusqu'à notre coup actuel afin de décider quel coup joue
 
 Dans notre cas, nous utiliserons une variant du Minimax, le Negamax qui simplifiera le code, au lieu d'avoir une fonction \textit{Min}
 et une fonction \textit{Max} nous aurons une seule fonction \textit{Negamax}.\\
-Cette variante s'appuie sur la relation $-max(a,b) = min(-a,-b)$ et nécessite que la fonction d'évaluation renvoie un résultat
+Cette variante s'appuie sur la relation $max(a,b) = -min(-a,-b)$ et nécessite que la fonction d'évaluation renvoie un résultat
 relatif au joueur, tel que score(Joueur1) = -score(Joueur2).\\
 L'algorithme est simplifié et sera au final :
 \begin{algorithm}
@@ -276,8 +276,8 @@ L'algorithme est simplifié et sera au final :
 \end{algorithmic}
 \end{algorithm}
 
-Cependant la fonction ne renvoie que le score et pas le coup à choisir, nous allons donc utiliser une variante \textsc{RootNegamax} 
-qui va être quasi identique sauf que juste après la ligne 9 nous allons aussi sauvegarder le coup. Cette méthode nous permet
+Cependant la fonction ne renvoie que le score et pas le coup à choisir, nous allons donc utiliser une autre procédure pour l'appel initial
+\textsc{RootNegamax} qui va être quasi identique sauf que juste après la ligne 9 nous allons aussi sauvegarder le coup. Cette méthode nous permet
 de sauvegarder un coup uniquement si il est jouable directement et de ne pas sauvegarder par mégarde un coup plus bas dans
 l'arborescence.\\
 
@@ -291,9 +291,9 @@ Heureusement nous avons une méthode très efficace pour réduire le nombre de c
 
 L'élagage alpha beta est un algorithme très puissant qui dans le meilleur des cas va évaluer $\sqrt{n}$ noeuds contre $n$ pour le négamax et $n$ dans
 le pire des cas.\\
-Le principe est le suivant: Un noeud qui ne peux pas contribuer positivement à l'évaluation n'a pas à être évalué.\\
+Le principe est le suivant: Un noeud qui ne peuT pas contribuer positivement à l'évaluation n'a pas à être évalué.\\
 En effet lorsque nous sommes surs que continuer à évaluer ne changera pas le résultat, autant s'arrêter.\\
-Cela va êter réalisé grace à deux variables $\alpha$ et $\beta$ qui vont former l'intervalle des valeurs qui pourraient contribuer à l'évaluation.
+Cela va être réalisé grace à deux variables $\alpha$ et $\beta$ qui vont former l'intervalle des valeurs qui pourraient contribuer à l'évaluation.
 
 \begin{figure}[!hbt]
 		\centering
@@ -304,20 +304,20 @@ Cela va êter réalisé grace à deux variables $\alpha$ et $\beta$ qui vont for
 Dans cet exemple nous avons trois élagages qui ont eu lieu (tous les noeuds sont affichés évalués pour la clarté), de gauche à droite:\\
 Nous cherchons à maximiser la valeur du noeud 5 à la profondeur 3 mais à minimiser la valeur de ses enfants.
 Ainsi pour que le noeud 4 soit utile il faudrait que sa valeur puisse encore dépasser 5 (notre valeur d'$\alpha$) en explorant ses enfants. Or comme nous minimisons
-sa valeur nous ne pourrons jamais dépasser 4, et par conséquent, ainsi il est inutile de continuer et d'valuer le noeud qui aurait valu 5.
+sa valeur nous ne pourrons jamais dépasser 4, et par conséquent, ainsi il est inutile de continuer et d'évaluer le noeud qui aurait valu 5.
 Nous avons économisé une évaluation ici.\\
 Nous cherchons ensuite à maximiser la valeur du noeud 6 à la profondeur 3 en minimisant la valeur de ses enfants.
 Ainsi le second noeud 6 n'est intéressant que si il peut dépasser le 6 (notre valeur d'$\alpha$) déjà calculé, or c'est impossible pour la même raison
 que précédemment, donc nous gagnons encore une évaluation.\\
 Enfin, nous cherchons à minimiser le noeud 5 à la profondeur 2 tout en maximisant ses enfants.
-Nous avons déterminé que sa valeur ne pouvais pas être supérieure à 5, or pour être utile il faudrait qu'elle puisse dépasser 6 (notre $\alpha$) pour 
-remplacer la valeur du noeud 6 de profondeur 1. Ainsi il est inutile de regarder le reste de sons sous arbre car cette partie est inutile.
+Nous avons déterminé que sa valeur ne pouvait pas être supérieure à 5, or pour être utile il faudrait qu'elle puisse dépasser 6 (notre $\alpha$) pour 
+remplacer la valeur du noeud 6 de profondeur 1. Ainsi il est inutile de regarder le reste de son sous arbre car cette partie est inutile.
 Nous gagnerons ici 6 évaluations.\\
 Dans ce cas nous aurions évalué 33 noeuds avec le négamax et seulement 25 avec l'alpha beta, ce qui représente un gain non négligeable. Nous sommes loin 
 de la valeur optimale théorique mais l'amélioration est conséquente et le sera de plus en plus lorsque la taille de l'arbre augmentera. \\
 
 \pagebreak
-Dans la même idée que précédemment pour passer du \textsc{Minimax} au \textsc{Négamax} nous pu adapter la procédure pour qu'elle soit correcte dans
+Dans la même idée que précédemment pour passer du \textsc{Minimax} au \textsc{Négamax} nous avons pu adapter la procédure pour qu'elle soit correcte dans
 notre framework négamax. L'algorithme est plus court mais pas forcément plus simple que la version reposant sur le minimax. Il est le suivant:\\
 \begin{algorithm}
 \caption{Algorithme de l'élagage alpha-beta}\label{negamax}
@@ -340,7 +340,7 @@ notre framework négamax. L'algorithme est plus court mais pas forcément plus s
 \end{algorithmic}
 \end{algorithm}
 
-Comme pour le \textsc{Negamax} nous appelons initialement cette procédure depuis une version modifée qui récupérera la coup après la ligne 11.\\
+Comme pour le \textsc{Negamax} nous appelons initialement cette procédure depuis une version modifée qui récupérera le coup après la ligne 11.\\
 Les paramètres $\alpha$ et $\beta$ seront respectivement initialisés à $-\infty$ et $+\infty$.\\
 Une façon de réduire le nombre de noeuds évalués serait de considérer à la gauche de l'arbre (les coups évalués en premiers) les coups potentiellement
 bons en choisissant une heuristique telle que la distance au centre du pion posé par le coup, car un coup a plus ce chance d'être bon si il est au centre.
@@ -349,9 +349,9 @@ bons en choisissant une heuristique telle que la distance au centre du pion pos�
 %==============================================================================
 \section{Évaluation d'une position}
 
-Tout d'abord, afin de respecter les conditions d'utilisation du framework Negamax, nous devons uen fonction d'évaluation asymétrique, elle sera définie
+Tout d'abord, afin de respecter les conditions d'utilisation du framework Negamax, nous devons avoir une fonction d'évaluation asymétrique, elle sera définie
 dans notre cas par: évaluation = évaluation(joueur courant) - évaluation(adversaire), ce qui respecte cette condition.\\
-Notre évaluation sera basée de du pattern matching, avec un très grand nombre de patterns, mais tout d'abord nous devons vérifier si la partie est terminée
+Notre évaluation sera basée sur du pattern matching, avec un très grand nombre de patterns, mais tout d'abord nous devons vérifier si la partie est terminée
 pour donner des scores signifiant la victoire (ou la défaite).
 
 \begin{figure}[!hbt]
@@ -401,7 +401,7 @@ pour donner des scores signifiant la victoire (ou la défaite).
 \end{figure}
 
 Afin de tester la victoire ou non, nous devons avoir 5 pions alignés, ce qui correspond à savoir si l'un des motifs ci dessus est présent dans le
-plateau du joueur courant. Dans le cas où l'un serait présent nosu retournerons un score de 100000 qui correspondra à une valeur innateginable, mais
+plateau du joueur courant. Dans le cas où l'un serait présent nous retournerons un score de 100000 qui correspondra à une valeur innateignable, mais
 pas tout à fait l'infini, nous devons rester plus petit que les valeurs d'infini utilisées pour $\alpha$ et $\beta$ lors de l'élagage alpha beta.\\
 
 Sinon, nous utiliserons des patternes similaires, notamment des lignes brisées, des lignes comme pour la victoire mais de longueur inférieure. Mais nous regarderons
@@ -432,7 +432,7 @@ La valeur d'une case est alors inversement proportionnelle à sa distance euclid
 tout en en éliminant certaines qui seraient illogiques, par exemple lorsque le plateau est vide, nous ne voulons pas jouer la première case visitée
 mais une bonne case, et bien que ce choix soit purement arbitraire il produit des résultats cohérents avec la stratégie qu'un humain utiliserait.\\
 
-En combinant les patternes et cette grille nous arrivons a de très bons résultats, que ce soit en début de partie ou en fin de partie car nous arrivons
+En combinant les patternes et cette grille nous arrivons à de très bons résultats, que ce soit en début de partie ou en fin de partie car nous arrivons
 à la fois à évaluer correctement une position sur un plateau presque vide et sur un plateau presque rempli.\\
 
 Ainsi bien que cette évaluation soit fondamentale pour avoir un bon algorithme, c'est la partie la plus subjective, car nous ne connaissons pas forcément 
@@ -456,7 +456,7 @@ Pour nous mesurer à la machine, nous avons avons utilisé une profondeur de rec
 Le premier constat que nous avons pu faire est qu'il est presque impossible de gagner contre la machine, elle arive bien à prévoir nos coups
 et notre victoire et nous empeche donc de l'atteindre. Ainsi la grande majorité des parties se sont terminées en égalité ou en victoire
 de la machine lorsque nous avons commis des erreurs.\\
-Un exemple de partie que nous avons réalisé que nous avons trouvé intéressante est le suivant:
+Un exemple de partie que nous avons réalisé que nous avons trouvé intéressant est le suivant:
 
 \begin{figure}[!hbt]
 	\centering
@@ -504,9 +504,9 @@ Un exemple de partie que nous avons réalisé que nous avons trouvé intéressan
 	\caption{Exemple de début de partie}
 \end{figure}
 
-Dans cette partie nous avons joué les O et la machine les X, comme nous pouvons le voir nous avosn vite été stoppés mais pas
+Dans cette partie nous avons joué les O et la machine les X, comme nous pouvons le voir nous avons vite été stoppés mais pas
 de la manière la plus évidente.
-Au lieu de venir se positionner directement devant nous, l'ordinateur a joué une case plus loin, ce uqi aura le même résultat 
+Au lieu de venir se positionner directement devant nous, l'ordinateur a joué une case plus loin, ce qui aura le même résultat 
 pour nous limiter mais qui à moyen terme avantagera l'ordinateur car ses deux pions pourrons ainsi être reliés par une ligne droite.\\
 Cette exemple illustre bien l'utilité de calculer en profondeur les coups car cela nous donne des stratégies comme celle ci qui se révèlent
 très efficaces.\\
@@ -528,6 +528,9 @@ Comme explicité plus haut, nous pourrions évaluer les positions dans un certai
 beta.\\
 Nous pourrions aussi paralléliser l'évaluation des coups et le pattern matching afin de bénéficier des multiples coeurs présents sur nos machines.
 Cela nous donnerait un gain de performance considérable et nous permettrait d'évaluer plus de positions, afin d'être encore meilleur qu'actuellement.\\
+Nous pourrions aussi faire évaluer la profondeur de calcul en fonction de la position, car sur un plateau plus rempli nous pouvons calculer plus de
+positions en un même temps, ce qui permettrait d'être encore pus efficace en fin de partie. De manière équivalent, nous n'avons pas forcément de regarder
+très profondément en début de partie, ce qui nous permetrrait alors de gagner du temps.\\
 
 De manière ecore plus liée à l'implémentation, nous pourrions optimiser notre usage de la mémoire, limiter le nombre d'opérations, et profiter encore plus
 de certaines opérations qui sont implémentée très efficacement, par exemples les opérateurs $>>$ et $<<$ sont implémentés au niveau hardware, ce qui les

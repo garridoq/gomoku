@@ -134,7 +134,7 @@ int get_best_move(node* n, int depth, move* best_move, int algorithm){
 	if(algorithm == NEGAMAX)
 		rootNegamax(n, depth, best_move);
 	else if(algorithm == ALPHA_BETA)
-		rootAlphaBeta(n, std::numeric_limits<int>::min()+1, std::numeric_limits<int>::max()-1, depth, best_move);
+		rootAlphaBeta(n, std::numeric_limits<int>::min(), std::numeric_limits<int>::max()-1, depth, best_move);
 	else{
 		std::cout << "Error : unknown move finding algorithm" << std::endl;
 		return -1;
