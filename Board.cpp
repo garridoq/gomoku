@@ -69,8 +69,8 @@ int Board::make_move(int bit, int side){
 	}
 	// Checking if the move is pseudo legal
 	// We will check if the position is won in th evaluation function
-	if(((bitboards[2] >> bit) & 1ULL) == 1){
-		std::cout << "Error, the square is alreay occupied" << std::endl;
+	if(is_legal_move(bit, side) == 0){
+		
 		return 3;
 	}
 	
@@ -83,6 +83,15 @@ int Board::make_move(int bit, int side){
 	bitboards[2] |= 1ULL << bit;
 	
 	return 0;
+}
+
+int Board::is_legal_move(int bit, int side){
+	// Checking if the move is pseudo legal
+	if(((bitboards[2] >> bit) & 1ULL) == 1){
+		//std::cout << "Error, the square is alreay occupied" << std::endl;
+		return 0;
+	}
+	return 1;
 }
 
 void print_bitboard(U64 b){

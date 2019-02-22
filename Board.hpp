@@ -27,6 +27,7 @@ class Board{
 		U64 get_available_squares();
 		void print_board();
 		int make_move(int bit, int side);
+		int is_legal_move(int bit, int side);
 		U64* get_bitboards();
 	private:
 		U64 bitboards[3] = {};
