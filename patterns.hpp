@@ -118,7 +118,7 @@ Pattern patterns_length_3_broken_opponent[8] = {
 	{ 0x1000408000000000ULL, 4, 4},
 	{ 0x1020008000000000ULL, 4, 4},
 	//{ 0x800200080000000ULL, 5, 5},
-};//TODO
+};
 
 Pattern patterns_length_2[4] = {
 	{ 0xC000000000000000ULL, 2, 1},

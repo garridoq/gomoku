@@ -13,6 +13,5 @@ int main(){
 
 	for(int i = 0; i < 100000000; i++){
 		int count = pattern_match(b, pat);
-//		std::cout << "On a matché :" << count << " fois" << std::endl;
 	}
 }

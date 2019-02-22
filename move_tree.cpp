@@ -13,15 +13,12 @@ void gen_children(node* n){
 		U64 squares = available_squares;
 		//Counts the number of ones (available squares for our children number
 		int nb_ones = 0;
-//		std::cout << available_squares << std::endl;
 		while(squares != 0){
 			bit = squares & 1;
 			if(bit == 1)
 				nb_ones++;
 			squares >>= 1;
 		}
-//		std::cout << "we have " << nb_ones << " possible moves\n" << std::endl;
-
 		// Generates all children
 		// may be errors of same references for the board in multiple moves
 		n->children = std::vector<node>(nb_ones);
@@ -30,7 +27,6 @@ void gen_children(node* n){
 		while(available_squares != 0){
 			bit = available_squares & 1;
 			if(bit == 1){
-//				std::cout << "Creating child move :" << i <<" Side:"  << side << std::endl;
 				n->children[j].parent = n;
 				n->children[j].m.board = board_after_move(n->m);	
 				n->children[j].m.index = i;
@@ -65,23 +61,15 @@ int negamax(node* n, int depth){
 	
 	if(depth == 0){ 
 		return evaluate(n->m);;
-	//	return evaluate(n->m);
-	//when evaluation fuction works
 	}
 	int max = -10000000;
 	gen_children(n);
 	for(auto &child : n->children){
 	
 		int score = -negamax(&child, depth-1);
-	
-	//	std::cout <<"Move: " << board_after_move(child.m).get_bitboards()[2] << " Depth: "<< depth << std::endl; 
-		
 		if(score > max){
 			max = score;
 		}
-		//std::cout <<" Score:" << score  << " Max:" << max  << std::endl;
-//		if(depth == 2)
-//				std::cout << "===============================\n" << std::endl;
 	}
 	return max;
 }
@@ -100,17 +88,10 @@ void rootNegamax(node* n,int depth,move* best_move){
 	for(auto &child : n->children){
 	
 		int score = -negamax(&child, depth-1);
-	
-		//std::cout <<"Move: " << board_after_move(child.m).get_bitboards()[2] << " Depth: "<< depth << std::endl; 
-		
 		if(score > max){
 			max = score;
 			copy(best_move, &child.m);
-		//	std::cout << "New best move :" <<  board_after_move(*best_move).get_bitboards()[2];
 		}
-//		std::cout <<" Score:" << score  << " Max:" << max  << std::endl;
-//		if(depth == 2)
-//				std::cout << "===============================\n" << std::endl;
 	}
 }
 
@@ -120,17 +101,14 @@ int alphaBeta(node* n,int alpha, int beta, int depth){
 		return -evaluate(n->m);	
 	gen_children(n);
 	if(n->children.empty()){
-//		std::cout << "Game is over" << std::endl;
 			return -evaluate(n->m);
 	}
 	for(auto &child : n->children){
 		int score = -alphaBeta(&child,-beta, -alpha, depth-1);
-//		std::cout <<"BB0: " << board_after_move(child.m).get_bitboards()[0] << " BB1: "<<  board_after_move(child.m).get_bitboards()[1] << " Depth: "<< depth << " alpha: " << alpha << " beta: " << beta << " side: " << child.m.side << std::endl; 
 		if(score >= beta)
 			return beta;
 		if(score > alpha)
 			alpha = score;
-//		std::cout <<" Score:" << score  << " alpha:" << alpha  << std::endl;
 	}
 	return alpha;
 }
@@ -140,14 +118,11 @@ void rootAlphaBeta(node* n, int alpha, int beta, int depth, move* best_move){
 	gen_children(n);
 	for(auto &child : n->children){
 		int score = -alphaBeta(&child,alpha, beta, depth-1);
-//		std::cout <<"Move: " << board_after_move(child.m).get_bitboards()[2] << " Depth: "<< depth << " alpha: " << alpha << " beta: " << beta << std::endl; 
 		if(score > alpha){
 			alpha = score;
 			copy(best_move, &child.m);	
-//			std::cout << "New best move :" <<  board_after_move(*best_move).get_bitboards()[2]<< " alpha : " <<alpha << std::endl;
 		}
 	}
-//	std::cout << "Best score found : " << alpha << " with move: " <<  board_after_move(*best_move).get_bitboards()[2] << std::endl;
 }
 
 
@@ -164,9 +139,6 @@ int get_best_move(node* n, int depth, move* best_move, int algorithm){
 		std::cout << "Error : unknown move finding algorithm" << std::endl;
 		return -1;
 	}
-
-//	std::cout << "finished getting best move\n" << std::endl;
-//	std::cout << "best move :" <<  board_after_move(*best_move).get_bitboards()[2] << std::endl;
 	return 0;
 }
 

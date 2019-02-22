@@ -52,7 +52,6 @@ void Board::print_board(){
 
 	for(i = 0; i<8; i++){
 		std::cout << 8-i<< "  " <<out.substr(16*i,16) <<"|" <<std::endl;
-		//std::cout << "----------------" <<std::endl;
 	}
 	std::cout << "   |1|2|3|4|5|6|7|8|" <<std::endl;
 }
