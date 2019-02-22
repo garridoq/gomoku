@@ -349,6 +349,11 @@ bons en choisissant une heuristique telle que la distance au centre du pion pos�
 %==============================================================================
 \section{Évaluation d'une position}
 
+Tout d'abord, afin de respecter les conditions d'utilisation du framework Negamax, nous devons uen fonction d'évaluation asymétrique, elle sera définie
+dans notre cas par: évaluation = évaluation(joueur courant) - évaluation(adversaire), ce qui respecte cette condition.\\
+Notre évaluation sera basée de du pattern matching, avec un très grand nombre de patterns, mais tout d'abord nous devons vérifier si la partie est terminée
+pour donner des scores signifiant la victoire (ou la défaite).
+
 \begin{figure}[!hbt]
 	\centering
 	\begin{TAB}(e,0.5cm,0.5cm){|c|c|c|c|c|c|c|c|}{|c|c|c|c|c|c|c|c|}
@@ -395,14 +400,141 @@ bons en choisissant une heuristique telle que la distance au centre du pion pos�
 	\caption{Patterns vérifiés pour la victoire ou non}
 \end{figure}
 
+Afin de tester la victoire ou non, nous devons avoir 5 pions alignés, ce qui correspond à savoir si l'un des motifs ci dessus est présent dans le
+plateau du joueur courant. Dans le cas où l'un serait présent nosu retournerons un score de 100000 qui correspondra à une valeur innateginable, mais
+pas tout à fait l'infini, nous devons rester plus petit que les valeurs d'infini utilisées pour $\alpha$ et $\beta$ lors de l'élagage alpha beta.\\
+
+Sinon, nous utiliserons des patternes similaires, notamment des lignes brisées, des lignes comme pour la victoire mais de longueur inférieure. Mais nous regarderons
+aussi lorsque l'ennemi bloque notre avancée, comme par exemple pour une ligne drotie de 3 de longueur bloquée des deux côtés par notre adversaire.\\
+Cependant il faut réussir à déterminer quels motifs sont importants à regarder car plus nous évaluons de motifs sur chaque position, moins nous pourrons
+évaluer de positions en un temps imparti. Il faut donc faut trovuer le juste milieu entre quantité et qualité des motifs recherchés.\\
+
+De plus certaines zones du plateau sont plus intéressantes d'un point de vue stratégique, notamment le centre, ainsi nous préférons jouer un pion au centre
+du plateau plutôt que dans un coin. Nous matérialisons cette priorité de placement par la grille coefficientée suivante:
+\pagebreak
+
+\begin{figure}[!hbt]
+		\center
+	\begin{TAB}(e,0.5cm,0.5cm){|c|c|c|c|c|c|c|c|}{|c|c|c|c|c|c|c|c|}
+		1 & 2 & 3 & 4 & 4 & 3 & 2 & 1 \\
+		2 & 3 & 4 & 5 & 5 & 4 & 3 & 2 \\
+		3 & 4 & 5 & 6 & 6 & 5 & 4 & 3 \\
+		4 & 5 & 6 & 7 & 7 & 6 & 5 & 4 \\
+		4 & 5 & 6 & 7 & 7 & 6 & 5 & 4 \\
+		3 & 4 & 5 & 6 & 6 & 5 & 4 & 3 \\
+		2 & 3 & 4 & 5 & 5 & 4 & 3 & 2 \\
+		1 & 2 & 3 & 4 & 4 & 3 & 2 & 1 
+	\end{TAB}
+	\caption{Coefficients relatifs à la position sur le plateau}
+\end{figure}
+
+La valeur d'une case est alors inversement proportionnelle à sa distance euclidienne au centre. Cela va nous permettre de favoriser certaines positions
+tout en en éliminant certaines qui seraient illogiques, par exemple lorsque le plateau est vide, nous ne voulons pas jouer la première case visitée
+mais une bonne case, et bien que ce choix soit purement arbitraire il produit des résultats cohérents avec la stratégie qu'un humain utiliserait.\\
+
+En combinant les patternes et cette grille nous arrivons a de très bons résultats, que ce soit en début de partie ou en fin de partie car nous arrivons
+à la fois à évaluer correctement une position sur un plateau presque vide et sur un plateau presque rempli.\\
+
+Ainsi bien que cette évaluation soit fondamentale pour avoir un bon algorithme, c'est la partie la plus subjective, car nous ne connaissons pas forcément 
+la stratégie optimale. Bien que le jeu ai été très étudié sur une grille de 15 $\times$ 15 nous sommes sur une grille plus petite et certaines observations
+ou stratégies ne sont pas transposables parfaitement.\\
+De plus si nous voullions la meilleur fonction d'évaluation possible (bien qu'aucune ne soit la meilleure de manière absolue) il nous faudrait
+étudier le jeu plus en profondeur pour voir émerger des patternes et des tratégies intéressante, ou, à la manière des concepterus d'IA d'échecs, collaborrer
+avec d'excellents joueurs afin de transférer leur savoir à la machine.\\
+
+Nous atteignons bien ainsi une limite de la fonction d'évaluation, elle ne pourra jamais être fondamentalement meilleure que nous car nous l'avons
+programmé, et ainsi elle va imiter notre style de jeu. Ainsi si nous avons programmé une fonction d'évaluation mauvaise, la machine aura beau calculer bien 
+plus rapidement que nous, nous serons toujours capable de gagner. Cependant si elle est bien programmée (ce qui va être dur à évaluer), l'avantage de la puissance
+de calcul de la machine la fera nous dominer.
 
 \pagebreak
 %==============================================================================
 \section{Conlusion}
 \subsection{Résultats}
 
+Pour nous mesurer à la machine, nous avons avons utilisé une profondeur de recherche de 4 et l'élagage alpha beta.\\
+Le premier constat que nous avons pu faire est qu'il est presque impossible de gagner contre la machine, elle arive bien à prévoir nos coups
+et notre victoire et nous empeche donc de l'atteindre. Ainsi la grande majorité des parties se sont terminées en égalité ou en victoire
+de la machine lorsque nous avons commis des erreurs.\\
+Un exemple de partie que nous avons réalisé que nous avons trouvé intéressante est le suivant:
+
+\begin{figure}[!hbt]
+	\centering
+	\begin{TAB}(e,0.5cm,0.5cm){|c|c|c|c|c|c|c|c|}{|c|c|c|c|c|c|c|c|}
+		 &  &  &  &  &  &  &  \\
+		 &  &  &  &  &  &  &  \\
+		 &  &  &  &  &  &  &  \\
+		 &  &  &  &  &  &  &  \\
+		 &  &  &  &  &  &  &  \\
+		 &  &  &  &  &  &  &  \\
+		 &  &  &  &  &  &  &  \\
+		 &  &  &  &  &  &  & O 
+	\end{TAB}\hspace{0.5cm}
+	\begin{TAB}(e,0.5cm,0.5cm){|c|c|c|c|c|c|c|c|}{|c|c|c|c|c|c|c|c|}
+		 &  &  &  &  &  &  &  \\
+		 &  &  &  &  &  &  &  \\
+		 &  &  &  &  &  &  &  \\
+		 &  &  &  &  &  &  &  \\
+		 &  &  &  & X &  &  &  \\
+		 &  &  &  &  &  &  &  \\
+		 &  &  &  &  &  &  &  \\
+		 &  &  &  &  &  &  & O 
+	\end{TAB}
+	
+	\begin{TAB}(e,0.5cm,0.5cm){|c|c|c|c|c|c|c|c|}{|c|c|c|c|c|c|c|c|}
+		 &  &  &  &  &  &  &  \\
+		 &  &  &  &  &  &  &  \\
+		 &  &  &  &  &  &  &  \\
+		 &  &  &  &  &  &  &  \\
+		 &  &  &  & X &  &  &  \\
+		 &  &  &  &  &  &  &  \\
+		 &  &  &  &  &  &  &  \\
+		 &  &  &  &  &  & O & O 
+	\end{TAB}\hspace{0.5cm}
+	\begin{TAB}(e,0.5cm,0.5cm){|c|c|c|c|c|c|c|c|}{|c|c|c|c|c|c|c|c|}
+		 &  &  &  &  &  &  &  \\
+		 &  &  &  &  &  &  &  \\
+		 &  &  &  &  &  &  &  \\
+		 &  &  &  &  &  &  &  \\
+		 &  &  &  & X &  &  &  \\
+		 &  &  &  &  &  &  &  \\
+		 &  &  &  &  &  &  &  \\
+		 &  &  &  & X &  & O & O 
+	\end{TAB}
+	\caption{Exemple de début de partie}
+\end{figure}
+
+Dans cette partie nous avons joué les O et la machine les X, comme nous pouvons le voir nous avosn vite été stoppés mais pas
+de la manière la plus évidente.
+Au lieu de venir se positionner directement devant nous, l'ordinateur a joué une case plus loin, ce uqi aura le même résultat 
+pour nous limiter mais qui à moyen terme avantagera l'ordinateur car ses deux pions pourrons ainsi être reliés par une ligne droite.\\
+Cette exemple illustre bien l'utilité de calculer en profondeur les coups car cela nous donne des stratégies comme celle ci qui se révèlent
+très efficaces.\\
+
+Cependant nous avons pu dans certains cas piéger la machine qui de temps en temps jouait de manière étonnante, en jouant toujours la case
+correspondant au bit de poids faible du bitboard. Ceci est du à un bug dans notre code mais nous n'avons pas pu le trouver pour le résoudre à temps.\\
+Mais lorsque cela se produit, l'ordinateur pense toujours à nous bloquer pour ne pas que nous gagnions la partie, donc même si ses chances de gagner
+deviennent quasi-nulles, sa défaite n'est pas garantie.\\
+
+\pagebreak
 \subsection{Pour aller plus loin}
 
+Comme nous avons pu le voir nous avons obtenu un résultat très satisfaisant, mais qui pourrait otujours être amélioré.\\
+Tout d'abord la fonction d'évaluation pourrait l'être, que ce soit en réalisant plus de tests pour ajuster les différents motifs/poids,
+ou en étudiant encore plus en détail les stratégies possibles pour gagner.\\
+
+Mais la plupart des améliorations que nous pourrions réaliser sont plus liées à l'implémentation des algorithmes qu'aux algorithmes en eux mêmes.\\
+Comme explicité plus haut, nous pourrions évaluer les positions dans un certain ordre pour réduire le nombre de noeuds évalués par l'élagage alpha
+beta.\\
+Nous pourrions aussi paralléliser l'évaluation des coups et le pattern matching afin de bénéficier des multiples coeurs présents sur nos machines.
+Cela nous donnerait un gain de performance considérable et nous permettrait d'évaluer plus de positions, afin d'être encore meilleur qu'actuellement.\\
+
+De manière ecore plus liée à l'implémentation, nous pourrions optimiser notre usage de la mémoire, limiter le nombre d'opérations, et profiter encore plus
+de certaines opérations qui sont implémentée très efficacement, par exemples les opérateurs $>>$ et $<<$ sont implémentés au niveau hardware, ce qui les
+rends très rapides.\\
+
+Ainsi la majeure partie des améliorations des performances seraient du côté de la fonction d'évaluation pour augmenter la qualité de notre algorithme
+et du côté de l'implémentation des nos algorithmes pour gagner en vitesse.
 \pagebreak
 
 \end{document}

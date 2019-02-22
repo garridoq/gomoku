@@ -10,6 +10,6 @@
 \contentsline {subsection}{\numberline {4.1}Negamax}{6}{subsection.4.1}
 \contentsline {subsection}{\numberline {4.2}\IeC {\'E}lagage alpha-beta}{7}{subsection.4.2}
 \contentsline {section}{\numberline {5}\IeC {\'E}valuation d'une position}{9}{section.5}
-\contentsline {section}{\numberline {6}Conlusion}{10}{section.6}
-\contentsline {subsection}{\numberline {6.1}R\IeC {\'e}sultats}{10}{subsection.6.1}
-\contentsline {subsection}{\numberline {6.2}Pour aller plus loin}{10}{subsection.6.2}
+\contentsline {section}{\numberline {6}Conlusion}{11}{section.6}
+\contentsline {subsection}{\numberline {6.1}R\IeC {\'e}sultats}{11}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.2}Pour aller plus loin}{12}{subsection.6.2}
