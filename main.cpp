@@ -27,11 +27,11 @@ int main(){
 			std::cout << "y: ";
 			std::cin >> y;
 			index = 8*(y-1) + 7 - x+1;
-			if(m.board.is_legal_move(index,m.side) == 1){
+			if(m.board.is_legal_move(index,m.side) == 1 && x < 9 && x > 0 && y > 0 && y < 9){
 				legal_play = 1;
 			}
 			else{
-				std::cout << "Error, the square is alreay occupied" << std::endl;
+				std::cout << "Error, the square is alreay occupied or not on the board" << std::endl;
 			}
 		}
 		m.side = side_to_play;
