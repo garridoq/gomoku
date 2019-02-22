@@ -84,14 +84,17 @@ int determineScore(U64 *bitboards, int side){
 int is_game_over(Board board){
 	U64* bitboards = board.get_bitboards();
 	if(hasWon(bitboards[WHITE])){
+		board.print_board();
 		std::cout << "O's won the game, congratulations !" << std::endl;
 	   return 1;	
 	}
 	if(hasWon(bitboards[BLACK])){
+		board.print_board();
 		std::cout << "X's won the game, congratulations !" << std::endl;
 		return 1;
 	}
 	if(~bitboards[3] == 1ULL){
+		board.print_board();
 		std::cout << "The game is a draw." << std::endl;
 		return 1;
 	}
