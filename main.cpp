@@ -19,11 +19,21 @@ int main(){
 		
 		//We play
 		m.board.print_board();
-		std::cout << "Quel case voulez vous jouer ? \nx: ";
-		std::cin >>	x;
-		std::cout << "y: ";
-		std::cin >> y;
-		index = 8*(y-1) + 7 - x+1;
+		std::cout << "Quel case voulez vous jouer ?\n";
+		int legal_play = 0;
+		while(legal_play != 1){
+			std::cout << "x: ";
+			std::cin >>	x;
+			std::cout << "y: ";
+			std::cin >> y;
+			index = 8*(y-1) + 7 - x+1;
+			if(m.board.is_legal_move(index,m.side) == 1){
+				legal_play = 1;
+			}
+			else{
+				std::cout << "Error, the square is alreay occupied" << std::endl;
+			}
+		}
 		m.side = side_to_play;
 		m.index = index;
 		if((over = is_game_over(board_after_move(m))))
