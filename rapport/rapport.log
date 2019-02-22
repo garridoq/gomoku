@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.1.2)  22 FEB 2019 16:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.2.19)  22 FEB 2019 21:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1013,8 +1013,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 66--67
 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 68--70
+
+ []
+
 [2]
-Overfull \hbox (15.7973pt too wide) in paragraph at lines 76--81
+Overfull \hbox (15.7973pt too wide) in paragraph at lines 82--87
 []\OT1/cmr/m/n/10 Pour repr^^Sesenter le pla-teau nous n'avons pas uti-lis^^Se 
 de ta-bleau mais des \OT1/cmr/m/it/10 bit-boards \OT1/cmr/m/n/10 qui sont la re
 pr^^Sesentation
@@ -1025,12 +1030,12 @@ Easytable[row:8,col:8]
 Easytable[row:8,col:8]
 Easytable[row:8,col:8]
 
-Underfull \hbox (badness 10000) in paragraph at lines 128--131
+Underfull \hbox (badness 10000) in paragraph at lines 134--137
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 132--137
+Underfull \hbox (badness 10000) in paragraph at lines 138--143
 
  []
 
@@ -1038,51 +1043,51 @@ Underfull \hbox (badness 10000) in paragraph at lines 132--137
 Easytable[row:8,col:8]
 Easytable[row:8,col:8]
 
-Underfull \hbox (badness 10000) in paragraph at lines 174--176
+Underfull \hbox (badness 10000) in paragraph at lines 180--182
 
  []
 
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 181.
+put line 187.
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 212--213
+Underfull \hbox (badness 10000) in paragraph at lines 218--219
 
  []
 
 
-Overfull \hbox (5.67122pt too wide) in paragraph at lines 215--219
+Overfull \hbox (5.67122pt too wide) in paragraph at lines 221--225
 \OT1/cmr/m/n/10 Nous avons choisi de ne pas sto-cker le pla-teau apr^^Res le co
 up en m^^Semoire di-rec-te-ment car cette repr^^Sesentation
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 215--219
+Underfull \hbox (badness 10000) in paragraph at lines 221--225
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 231--232
+Underfull \hbox (badness 10000) in paragraph at lines 237--238
 
  []
 
 [5]
-Underfull \hbox (badness 10000) in paragraph at lines 246--254
+Underfull \hbox (badness 10000) in paragraph at lines 252--260
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 279--283
+Underfull \hbox (badness 10000) in paragraph at lines 285--289
 
  []
 
 [6]
-<ab.png, id=118, 1927.2pt x 977.6525pt>
+<ab.png, id=120, 1927.2pt x 977.6525pt>
 File: ab.png Graphic file (type png)
 <use ab.png>
-Package pdftex.def Info: ab.png  used on input line 300.
+Package pdftex.def Info: ab.png  used on input line 306.
 (pdftex.def)             Requested size: 317.0764pt x 160.84325pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 304--318
+Underfull \hbox (badness 10000) in paragraph at lines 310--324
 
  []
 
@@ -1092,29 +1097,29 @@ Easytable[row:8,col:8]
 Easytable[row:8,col:8]
 Easytable[row:8,col:8]
 
-Underfull \hbox (badness 10000) in paragraph at lines 403--406
+Underfull \hbox (badness 10000) in paragraph at lines 409--412
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 407--411
+Underfull \hbox (badness 10000) in paragraph at lines 413--417
 
  []
 
 [9]
 Easytable[row:8,col:8]
 
-Underfull \hbox (badness 10000) in paragraph at lines 431--434
+Underfull \hbox (badness 10000) in paragraph at lines 437--440
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 435--437
+Underfull \hbox (badness 10000) in paragraph at lines 441--443
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 438--444
+Underfull \hbox (badness 10000) in paragraph at lines 444--450
 
  []
 
@@ -1124,49 +1129,49 @@ Easytable[row:8,col:8]
 Easytable[row:8,col:8]
 Easytable[row:8,col:8]
 
-Underfull \hbox (badness 10000) in paragraph at lines 507--513
+Underfull \hbox (badness 10000) in paragraph at lines 513--519
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 514--518
+Underfull \hbox (badness 10000) in paragraph at lines 520--524
 
  []
 
 [11]
-Underfull \hbox (badness 10000) in paragraph at lines 522--525
+Underfull \hbox (badness 10000) in paragraph at lines 528--531
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 526--534
+Underfull \hbox (badness 10000) in paragraph at lines 532--540
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 535--538
+Underfull \hbox (badness 10000) in paragraph at lines 541--544
 
  []
 
 [12]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 543.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 543.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 549.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 549.
  (./rapport.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 543.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 543.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 549.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 549.
 Package rerunfilecheck Info: File `rapport.out' has not changed.
 (rerunfilecheck)             Checksum: DD3E78D89FABF5964F700B9A6BD4066C;820.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 543.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 549.
  ) 
 Here is how much of TeX's memory you used:
- 10922 strings out of 492982
- 152012 string characters out of 6134897
- 301532 words of memory out of 5000000
- 14290 multiletter control sequences out of 15000+600000
+ 10926 strings out of 492982
+ 152063 string characters out of 6134896
+ 301531 words of memory out of 5000000
+ 14292 multiletter control sequences out of 15000+600000
  12920 words of font info for 50 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  32i,12n,51p,274b,1373s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1182,10 +1187,10 @@ amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
 sy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pf
 b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on rapport.pdf (12 pages, 306925 bytes).
+Output written on rapport.pdf (12 pages, 307437 bytes).
 PDF statistics:
- 210 PDF objects out of 1000 (max. 8388607)
- 178 compressed objects within 2 object streams
- 39 named destinations out of 1000 (max. 500000)
+ 212 PDF objects out of 1000 (max. 8388607)
+ 180 compressed objects within 2 object streams
+ 41 named destinations out of 1000 (max. 500000)
  118 words of extra memory for PDF output out of 10000 (max. 10000000)
 

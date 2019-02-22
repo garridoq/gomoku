@@ -57,12 +57,12 @@ int determineScore(U64 *bitboards, int side){
 
 	// For a straight three : win in two plays
 	for (int i = 0; i < 4; i++){
-		score += 20 * pattern_match(playingBB, patterns_length_3[i], opponentBB, patterns_length_3_opponent[i]);
+		score += 30 * pattern_match(playingBB, patterns_length_3[i], opponentBB, patterns_length_3_opponent[i]);
 	}
 
 	// For a broken three
 	for (int i = 0; i < 8; i++){
-		score += 19 * pattern_match(playingBB, patterns_length_3_broken[i]);
+		score += 30 * pattern_match(playingBB, patterns_length_3_broken[i]);
 	}
 
 	// For two aligned

@@ -66,8 +66,14 @@ Une fois le code source obtenu il faudra exécuter la commande suivante pour com
 Tout en étant dans le dossier du code source.\\
 
 Vous obtiendrez plusieurs exécutables de test, ayant un nom comme \textit{test\_*}.\\
-Vous aurez aussi un fichier principal \textit{main} qui vous permettra de jouer contre l'IA.
+Vous aurez aussi un fichier principal \textit{main} qui vous permettra de jouer contre l'IA.\\
 
+Pour jouer appellez directement main de la manière suivante:
+\begin{lstlisting}[language=bash]
+	>./main DIFFICULTE
+\end{lstlisting}
+Si DIFFICULTE vaut "medium" vous serez en difficulté réduite (profondeur de recherche 2).\\
+Si DIFFICULTE est absent ou vaut autre chose, vous serez en difficulté maximale (profondeur de recherche 4).
 \pagebreak
 %==============================================================================
 \section{Structures de données}

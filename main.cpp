@@ -2,7 +2,18 @@
 #include "Board.hpp"
 #include "move_tree.hpp"
 #include "move.hpp"
-int main(){
+int main(int argc, char **argv){
+	
+	int depth = 4;
+	std::cout << "==============================\n" << std::endl;
+	if(argc > 1 && (std::string)argv[1] == (std::string)"medium"){
+		depth = 2;
+		std::cout << "Medium difficulty selected" << std::endl;
+	}
+	else{
+		std::cout << "Hard difficulty selected" << std::endl;
+	}
+	std::cout << "\n==============================" << std::endl;
 	
 	Board board{};
 
@@ -42,7 +53,7 @@ int main(){
 		//AI play
 		std::cout << "L'IA réfléchit" << std::endl;
 		last.m = m;			
-		get_best_move(&last, 4, &m, ALPHA_BETA);
+		get_best_move(&last, depth, &m, ALPHA_BETA);
 		if((over = is_game_over(board_after_move(m))))
 			break;
 		m.board = board_after_move(m);
